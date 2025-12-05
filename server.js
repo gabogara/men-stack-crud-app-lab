@@ -17,7 +17,6 @@ app.get("/planet/new", (req, res) => {
   res.render("planet/new.ejs");
 });
 
-
 // POST /planet
 app.post("/planet", async (req, res) => {
   if (req.body.hasRings === "on") {
@@ -28,6 +27,12 @@ app.post("/planet", async (req, res) => {
   await Planet.create(req.body);
   res.redirect("/planet/new");
 });
+
+// GET /planets
+app.get("/planet", (req, res) => {
+  res.send("Welcome to the index page!");
+});
+
 
 app.get("/", async (req, res) => {
   res.render("index.ejs");
