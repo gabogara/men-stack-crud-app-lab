@@ -29,10 +29,11 @@ app.post("/planet", async (req, res) => {
 });
 
 // GET /planets
-app.get("/planet", (req, res) => {
-  res.send("Welcome to the index page!");
+app.get("/planet", async (req, res) => {
+  const allPlanet = await Planet.find();
+  console.log(allPlanet);
+  res.render("planet/index.ejs", { planet: allPlanet });
 });
-
 
 app.get("/", async (req, res) => {
   res.render("index.ejs");
