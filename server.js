@@ -1,12 +1,17 @@
-// Here is where we import modules
-// We begin by loading Express
 const express = require("express");
+const dotenv = require("dotenv");
+dotenv.config();
+const mongoose = require("mongoose");
 
+// const Planet = require("./models/planet.js");
 const app = express();
+app.use(express.urlencoded({ extended: false }));
+mongoose.connect(process.env.MONGODB_URI);
 
-// server.js
+mongoose.connection.on("connected", () => {
+  console.log(`Connected to MongoDB ${mongoose.connection.name}`);
+});
 
-// GET /
 app.get("/", async (req, res) => {
   res.render("index.ejs");
 });
