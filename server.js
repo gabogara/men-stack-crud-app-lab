@@ -14,7 +14,19 @@ mongoose.connection.on("connected", () => {
 
 // GET /planets/new
 app.get("/planet/new", (req, res) => {
-  res.send("This route sends the user a form page!");
+  res.render("planet/new.ejs");
+});
+
+
+// POST /planet
+app.post("/planet", async (req, res) => {
+  if (req.body.hasRings === "on") {
+    req.body.hasRings = true;
+  } else {
+    req.body.hasRings = false;
+  }
+  await Planet.create(req.body);
+  res.redirect("/planet/new");
 });
 
 app.get("/", async (req, res) => {
