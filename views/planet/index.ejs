@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planets Index</title>
+  </head>
+  <body>
+    <h1>All planets</h1>
+    <ul>
+      <% planet.forEach(planet => { %>
+      <li><%= planet.name %></li>
+      <% }); %>
+    </ul>
+  </body>
+</html>
