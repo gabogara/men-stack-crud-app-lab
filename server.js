@@ -2,10 +2,15 @@ const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
+const morgan = require("morgan");
 
 const Planet = require("./models/planet.js");
 const app = express();
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride("_method")); // new
+app.use(morgan("dev")); //new
+
 mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on("connected", () => {
@@ -41,6 +46,11 @@ app.get("/planet", async (req, res) => {
 app.get("/planet/:planetId", async (req, res) => {
   const foundPlanet = await Planet.findById(req.params.planetId);
   res.render("planet/show.ejs", { planet: foundPlanet });
+});
+
+app.delete("/planet/:planetId", async (req, res) => {
+  await Planet.findByIdAndDelete(req.params.planetId);
+  res.redirect("/planet");
 });
 
 app.get("/planet/:planetId/edit", async (req, res) => {
