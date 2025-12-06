@@ -43,6 +43,13 @@ app.get("/planet/:planetId", async (req, res) => {
   res.render("planet/show.ejs", { planet: foundPlanet });
 });
 
+app.get("/planet/:planetId/edit", async (req, res) => {
+  const foundPlanet = await Planet.findById(req.params.planetId);
+  res.render("planet/edit.ejs", {
+    planet: foundPlanet,
+  });
+});
+
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 });

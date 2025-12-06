@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update a planet</title>
+  </head>
+  <body>
+    <a href="/planet">Back to planets</a>
+    <!-- update the header -->
+    <h1>Edit <%= planet.name %></h1>
+    <form action="/planet/<%=planet._id%>?_method=PUT" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" />
+
+      <label for="hasRings">Does it has rings?</label>
+      <!-- prettier-ignore -->
+      <input
+        type="checkbox"
+        name="hasRings"
+        id="hasRings"
+        <% if (planet.hasRings) { %>
+      checked <% } %> />
+
+      <!-- update the button text -->
+      <button type="submit">Update planet</button>
+    </form>
+  </body>
+</html>
