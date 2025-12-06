@@ -11,6 +11,9 @@ mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on("connected", () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}`);
 });
+app.get("/", async (req, res) => {
+  res.render("index.ejs");
+});
 
 // GET /planets/new
 app.get("/planet/new", (req, res) => {
@@ -32,12 +35,14 @@ app.post("/planet", async (req, res) => {
 app.get("/planet", async (req, res) => {
   const allPlanet = await Planet.find();
   console.log(allPlanet);
-  res.render("planet/index.ejs", { planet: allPlanet });
+  res.render("planet/index.ejs", { planets: allPlanet });
 });
 
-app.get("/", async (req, res) => {
-  res.render("index.ejs");
+app.get("/planet/:planetId", async (req, res) => {
+  const foundPlanet = await Planet.findById(req.params.planetId);
+  res.render("planet/show.ejs", { planets: foundPlanet });
 });
+
 
 app.listen(3000, () => {
   console.log("Listening on port 3000");
