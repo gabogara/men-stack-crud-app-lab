@@ -3,31 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
     <title><%= planet.name %></title>
   </head>
-  <!-- views/planet/show.ejs -->
-
   <body>
-    <a href="/planet/">Back to all Planets</a>
-    <a href="/planet/<%= planet._id %>/edit">Edit <%= planet.name %></a>
-    <h1><%= planet.name %></h1>
-    <p><strong>Description:</strong> <%= planet.description %></p>
-    <p>
-      <strong>Distance from the Sun:</strong>
-      <%= planet.distanceFromSun %> million km
-    </p>
+    <div class="container">
+      <div class="top-links">
+        <a href="/planet/">Back to all Planets</a>
+        <a href="/planet/<%= planet._id %>/edit">Edit <%= planet.name %></a>
+      </div>
 
-    <% if (planet.image) { %>
-    <img src="<%= planet.image %>" alt="<%= planet.name %>" width="250" />
-    <% } %>
-    <!-- Conditional rendering based on fruit's readiness -->
-    <% if (planet.hasRings) { %>
-    <p>This planet has rings!</p>
-    <% } else { %>
-    <p>This planet doesn't has rings</p>
-    <% } %>
-    <form action="/planet/<%=planet._id%>?_method=DELETE" method="POST">
-      <button type="submit">Delete <%= planet.name %></button>
-    </form>
+      <h1><%= planet.name %></h1>
+
+      <% if (planet.image) { %>
+      <img
+        class="planet-detail-image"
+        src="<%= planet.image %>"
+        alt="<%= planet.name %>"
+      />
+      <% } %>
+
+      <div class="planet-info">
+        <p><strong>Description:</strong> <%= planet.description %></p>
+        <p>
+          <strong>Distance from the Sun:</strong>
+          <%= planet.distanceFromSun %> million km
+        </p>
+
+        <% if (planet.hasRings) { %>
+        <p>This planet has rings!</p>
+        <% } else { %>
+        <p>This planet doesn't have rings</p>
+        <% } %>
+      </div>
+
+      <form action="/planet/<%=planet._id%>?_method=DELETE" method="POST">
+        <button type="submit">Delete <%= planet.name %></button>
+      </form>
+    </div>
   </body>
 </html>

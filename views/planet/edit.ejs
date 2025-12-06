@@ -3,40 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
     <title>Edit <%= planet.name %></title>
   </head>
   <body>
-    <a href="/planet/<%= planet._id %>">Back to planet</a>
-    <h1>Edit <%= planet.name %></h1>
+    <div class="container">
+      <div class="top-links">
+        <a href="/planet/<%= planet._id %>">Back to planet</a>
+      </div>
 
-    <form action="/planet/<%= planet._id %>?_method=PUT" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" name="name" id="name" value="<%= planet.name %>" />
+      <h1>Edit <%= planet.name %></h1>
 
-      <label for="description">Description:</label>
-      <input
-        type="text"
-        name="description"
-        id="description"
-        value="<%= planet.description %>"
-      />
+      <form action="/planet/<%= planet._id %>?_method=PUT" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" value="<%= planet.name %>" />
 
-      <label for="distanceFromSun">Distance from the Sun (millions km):</label>
-      <input
-        type="number"
-        name="distanceFromSun"
-        id="distanceFromSun"
-        value="<%= planet.distanceFromSun %>"
-      />
+        <label for="description">Description:</label>
+        <input
+          type="text"
+          name="description"
+          id="description"
+          value="<%= planet.description %>"
+        />
 
-      <label for="image">Image URL:</label>
-      <input type="text" name="image" id="image" value="<%= planet.image %>" />
+        <label for="distanceFromSun"
+          >Distance from the Sun (millions km):</label
+        >
+        <input
+          type="number"
+          name="distanceFromSun"
+          id="distanceFromSun"
+          value="<%= planet.distanceFromSun %>"
+        />
 
-      <label for="hasRings">Has rings?</label>
-      <input type="checkbox" name="hasRings" id="hasRings" <%= planet.hasRings ?
-      "checked" : "" %> />
+        <label for="image">Image URL:</label>
+        <input
+          type="text"
+          name="image"
+          id="image"
+          value="<%= planet.image %>"
+        />
 
-      <button type="submit">Update Planet</button>
-    </form>
+        <label for="hasRings">Has rings?</label>
+        <input type="checkbox" name="hasRings" id="hasRings" <%= planet.hasRings
+        ? "checked" : "" %> />
+
+        <button type="submit">Update Planet</button>
+      </form>
+    </div>
   </body>
 </html>
