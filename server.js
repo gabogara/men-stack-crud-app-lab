@@ -16,8 +16,17 @@ mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on("connected", () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}`);
 });
+
+//Home
 app.get("/", async (req, res) => {
   res.render("index.ejs");
+});
+
+// GET /Show all planets
+app.get("/planet", async (req, res) => {
+  const allPlanet = await Planet.find();
+  console.log(allPlanet);
+  res.render("planet/index.ejs", { planets: allPlanet });
 });
 
 // GET /planets/new
@@ -25,7 +34,7 @@ app.get("/planet/new", (req, res) => {
   res.render("planet/new.ejs");
 });
 
-// POST /planet
+// POST / Create planet
 app.post("/planet", async (req, res) => {
   if (req.body.hasRings === "on") {
     req.body.hasRings = true;
@@ -36,23 +45,16 @@ app.post("/planet", async (req, res) => {
   res.redirect("/planet/new");
 });
 
-// GET /planets
-app.get("/planet", async (req, res) => {
-  const allPlanet = await Planet.find();
-  console.log(allPlanet);
-  res.render("planet/index.ejs", { planets: allPlanet });
-});
 
+// SHOW - Show a specific planet
+// GET /plants/:planetId
 app.get("/planet/:planetId", async (req, res) => {
   const foundPlanet = await Planet.findById(req.params.planetId);
   res.render("planet/show.ejs", { planet: foundPlanet });
 });
 
-app.delete("/planet/:planetId", async (req, res) => {
-  await Planet.findByIdAndDelete(req.params.planetId);
-  res.redirect("/planet");
-});
-
+// EDIT - form to edit a planet
+// GET /planet/:planetId/edit
 app.get("/planet/:planetId/edit", async (req, res) => {
   const foundPlanet = await Planet.findById(req.params.planetId);
   res.render("planet/edit.ejs", {
@@ -60,6 +62,9 @@ app.get("/planet/:planetId/edit", async (req, res) => {
   });
 });
 
+
+// UPDATE - update a planet in the DB
+// PUT /planet/:planetId
 app.put("/planet/:planetId", async (req, res) => {
   // Handle the 'hasRings' checkbox data
   if (req.body.hasRings === "on") {
@@ -73,6 +78,13 @@ app.put("/planet/:planetId", async (req, res) => {
 
   // Redirect to the planet's show page to see the updates
   res.redirect(`/planet/${req.params.planetId}`);
+});
+
+// DELETE - delete a planet
+// DELETE /planet/:planetId
+app.delete("/planet/:planetId", async (req, res) => {
+  await Planet.findByIdAndDelete(req.params.planetId);
+  res.redirect("/planet");
 });
 
 app.listen(3000, () => {

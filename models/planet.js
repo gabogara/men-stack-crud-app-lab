@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const planetSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, required: true },
   description: String,
   distanceFromSun: Number,
   hasRings: Boolean,
