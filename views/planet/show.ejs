@@ -8,10 +8,18 @@
   <!-- views/planet/show.ejs -->
 
   <body>
-    <a href="/planet/">Back to Planet</a>
+    <a href="/planet/">Back to all Planets</a>
     <a href="/planet/<%= planet._id %>/edit">Edit <%= planet.name %></a>
     <h1><%= planet.name %></h1>
+    <p><strong>Description:</strong> <%= planet.description %></p>
+    <p>
+      <strong>Distance from the Sun:</strong>
+      <%= planet.distanceFromSun %> million km
+    </p>
 
+    <% if (planet.image) { %>
+    <img src="<%= planet.image %>" alt="<%= planet.name %>" width="250" />
+    <% } %>
     <!-- Conditional rendering based on fruit's readiness -->
     <% if (planet.hasRings) { %>
     <p>This planet has rings!</p>

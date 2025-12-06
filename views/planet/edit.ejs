@@ -3,27 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Update a planet</title>
+    <title>Edit <%= planet.name %></title>
   </head>
   <body>
-    <a href="/planet">Back to planets</a>
-    <!-- update the header -->
+    <a href="/planet/<%= planet._id %>">Back to planet</a>
     <h1>Edit <%= planet.name %></h1>
-    <form action="/planet/<%=planet._id%>?_method=PUT" method="POST">
+
+    <form action="/planet/<%= planet._id %>?_method=PUT" method="POST">
       <label for="name">Name:</label>
-      <input type="text" name="name" id="name" />
+      <input type="text" name="name" id="name" value="<%= planet.name %>" />
 
-      <label for="hasRings">Does it has rings?</label>
-      <!-- prettier-ignore -->
+      <label for="description">Description:</label>
       <input
-        type="checkbox"
-        name="hasRings"
-        id="hasRings"
-        <% if (planet.hasRings) { %>
-      checked <% } %> />
+        type="text"
+        name="description"
+        id="description"
+        value="<%= planet.description %>"
+      />
 
-      <!-- update the button text -->
-      <button type="submit">Update planet</button>
+      <label for="distanceFromSun">Distance from the Sun (millions km):</label>
+      <input
+        type="number"
+        name="distanceFromSun"
+        id="distanceFromSun"
+        value="<%= planet.distanceFromSun %>"
+      />
+
+      <label for="image">Image URL:</label>
+      <input type="text" name="image" id="image" value="<%= planet.image %>" />
+
+      <label for="hasRings">Has rings?</label>
+      <input type="checkbox" name="hasRings" id="hasRings" <%= planet.hasRings ?
+      "checked" : "" %> />
+
+      <button type="submit">Update Planet</button>
     </form>
   </body>
 </html>
