@@ -8,16 +8,18 @@
   </head>
   <body>
     <div class="container">
-      <a href="/planet/new">Add New Planet</a>
+      <div class="top-links">
+        <a href="/planet/new">Add New Planet</a>
+        <a href="/">Back home</a>
+      </div>
       <h1>All planets</h1>
       <ul>
         <% planets.forEach(planet => { %>
         <li>
-        <a href="/planet/<%= planet._id %>"> <%= planet.name %> </a>
-      </li>
+          <a href="/planet/<%= planet._id %>"> <%= planet.name %> </a>
+        </li>
         <% }); %>
       </ul>
-      <a href="/">Back home</a>
     </div>
   </body>
 </html>
