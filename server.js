@@ -60,6 +60,21 @@ app.get("/planet/:planetId/edit", async (req, res) => {
   });
 });
 
+app.put("/planet/:planetId", async (req, res) => {
+  // Handle the 'hasRings' checkbox data
+  if (req.body.hasRings === "on") {
+    req.body.hasRings = true;
+  } else {
+    req.body.hasRings = false;
+  }
+
+  // Update the planet in the database
+  await Planet.findByIdAndUpdate(req.params.planetId, req.body);
+
+  // Redirect to the planet's show page to see the updates
+  res.redirect(`/planet/${req.params.planetId}`);
+});
+
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
