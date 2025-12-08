@@ -8,10 +8,8 @@
   </head>
   <body>
     <div class="container">
-      <div class="top-links">
-        <a href="/planet/new">Add New Planet</a>
-        <a href="/">Back home</a>
-      </div>
+      <%- include('./partials/nav') %>
+
       <h1>All planets</h1>
       <% if (planets.length === 0) { %>
       <p>There are no planets yet.</p>

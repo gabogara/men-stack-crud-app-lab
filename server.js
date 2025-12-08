@@ -20,22 +20,23 @@ mongoose.connection.on("connected", () => {
 
 app.use(express.static(path.join(__dirname, "public")));
 
-
 //Home
 app.get("/", async (req, res) => {
-  res.render("index.ejs");
+  res.render("index.ejs", { currentPage: "home" });
 });
 
 // GET /Show all planets
 app.get("/planet", async (req, res) => {
   const allPlanet = await Planet.find();
-  console.log(allPlanet);
-  res.render("planet/index.ejs", { planets: allPlanet });
+  res.render("planet/index.ejs", {
+    planets: allPlanet,
+    currentPage: "planetIndex",
+  });
 });
 
 // GET /planets/new
 app.get("/planet/new", (req, res) => {
-  res.render("planet/new.ejs");
+  res.render("planet/new.ejs", { currentPage: "planetNew" });
 });
 
 // POST / Create planet
@@ -49,12 +50,14 @@ app.post("/planet", async (req, res) => {
   res.redirect("/planet/new");
 });
 
-
 // SHOW - Show a specific planet
 // GET /plants/:planetId
 app.get("/planet/:planetId", async (req, res) => {
   const foundPlanet = await Planet.findById(req.params.planetId);
-  res.render("planet/show.ejs", { planet: foundPlanet });
+  res.render("planet/show.ejs", {
+    planet: foundPlanet,
+    currentPage: "planetShow",
+  });
 });
 
 // EDIT - form to edit a planet
@@ -63,9 +66,9 @@ app.get("/planet/:planetId/edit", async (req, res) => {
   const foundPlanet = await Planet.findById(req.params.planetId);
   res.render("planet/edit.ejs", {
     planet: foundPlanet,
+    currentPage: "planetEdit",
   });
 });
-
 
 // UPDATE - update a planet in the DB
 // PUT /planet/:planetId

@@ -1,0 +1,9 @@
+<nav class="main-nav">
+  <% if (currentPage !== "home") { %>
+  <a href="/">Home</a>
+  <% } %> <% if (currentPage !== "planetIndex") { %>
+  <a href="/planet">All Planets</a>
+  <% } %> <% if (currentPage !== "planetNew") { %>
+  <a href="/planet/new">Add New Planet</a>
+  <% } %>
+</nav>
