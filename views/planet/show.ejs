@@ -8,8 +8,10 @@
   </head>
   <body>
     <div class="container">
-      <%- include('./partials/nav') %>
-
+      <%- include("./partials/nav") %>
+      <a href="/planet/<%= planet._id %>/edit" class="btn btn-edit">
+        Edit Planet
+      </a>
       <h1><%= planet.name %></h1>
 
       <% if (planet.image) { %>
